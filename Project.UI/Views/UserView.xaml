@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Project.UI.Views.UserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="9*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <ListBox Grid.Column="0" Margin="5" ItemsSource="{Binding Doctors}" SelectedItem="{Binding SelectedDoctor}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontSize="15" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <ListBox Grid.Column="1" Margin="5" ItemsSource="{Binding Drugs}" SelectedItem="{Binding SelectedDrug}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="{Binding Image}" Width="150" Height="150"></Image>
+                            <TextBlock Text="{Binding Name}" FontSize="15" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="{Binding DrugPrice}" FontSize="15" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Grid.Column="0" Grid.Row="1" Margin="5" Command="{Binding ShowAppointments}">Show Appointments</Button>
+            <Button Grid.Column="1" Grid.Row="1" Margin="5" Command="{Binding BuyDrugCommand}">Info/Buy</Button>
+        </Grid>
+        <StackPanel Grid.Column="0">
+            <Button Height="20" Command="{Binding BackToLoginCommand}" Visibility="{Binding VisibilityOfFirstBack}">Back</Button>
+            <Button Height="20" Command="{Binding ShowProfileCommand}">Profile</Button>
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}"></ContentControl>
+    </Grid>
+</UserControl>
